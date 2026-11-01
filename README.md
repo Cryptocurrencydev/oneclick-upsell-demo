@@ -1,5 +1,7 @@
 # One-click upsell demo
 
+**Live demo: https://oneclick-upsell-demo.vercel.app** (Stripe test mode: pay with `4242 4242 4242 4242`, any future date and CVC)
+
 A small checkout for a **fictional** tea brand (Fernhollow Tea Co.), built to show the kind of flow a checkout platform ships: buyer pays → sees a post-purchase offer → one click charges the **saved card off-session** → one order with two line items.
 
 **Stripe TEST mode only.** The server refuses to start with a non-test key, and the webhook handler rejects live-mode events.
