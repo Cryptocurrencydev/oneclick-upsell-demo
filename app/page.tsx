@@ -1,69 +1,28 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Checkout from "@/components/Checkout";
+import { MAIN_PRODUCT, fmt } from "@/lib/catalog";
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="grid">
+      <section className="card">
+        <h1>Your order</h1>
+        <div className="product" style={{ margin: "18px 0" }}>
+          <div className="swatch" aria-hidden />
+          <div>
+            <strong>{MAIN_PRODUCT.name}</strong>
+            <div className="muted">Smoked low and slow over applewood. Notes of campfire, honey and stone fruit.</div>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="row"><span>Subtotal</span><span>{fmt(MAIN_PRODUCT.amount_cents)}</span></div>
+        <div className="row"><span>Shipping</span><span>Free</span></div>
+        <div className="row total"><span>Total</span><span>{fmt(MAIN_PRODUCT.amount_cents)}</span></div>
+        <div className="notice warn" style={{ marginTop: 14 }}>
+          Test cards: <span className="mono">4242 4242 4242 4242</span> (success) ·{" "}
+          <span className="mono">4000 0000 0000 0002</span> (decline) ·{" "}
+          <span className="mono">4000 0027 6000 3184</span> (3DS). Any future date and CVC.
         </div>
-      </main>
+      </section>
+      <Checkout />
     </div>
   );
 }
