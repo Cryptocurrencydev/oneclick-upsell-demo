@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </header>
           {children}
           <footer className="foot">
-            Fictional brand. Built with Claude Code. Test cards only: 4242 4242 4242 4242 · <Link href="/admin">admin</Link>
+            Fictional brand · Demo by DC Tech · Built with Claude Code. Test cards only: 4242 4242 4242 4242 · <Link href="/admin">admin</Link>
           </footer>
         </div>
       </body>
