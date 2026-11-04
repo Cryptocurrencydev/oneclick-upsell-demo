@@ -61,7 +61,7 @@ Test cards: `4242 4242 4242 4242` success · `4000 0000 0000 0002` decline · `4
 
 ## How this was built
 
-**Agent:** Claude Code (Claude Opus 5.5) in one terminal session, 1 Nov 2026. A human supplied the spec, the Stripe test keys and the Neon terms acceptance. All code, tests, debugging and deployment were done by the agent.
+**Agent:** Claude Code (Claude Opus 5.5) in one terminal session, 1 Nov 2026. A human supplied the spec, the Stripe test keys and the Neon terms acceptance. Built with Claude Code, reviewed and verified by me (Jay).
 
 **Timeline** (wall clock, from the session's timestamp log):
 
