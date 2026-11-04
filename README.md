@@ -61,21 +61,21 @@ Test cards: `4242 4242 4242 4242` success · `4000 0000 0000 0002` decline · `4
 
 ## How this was built
 
-**Agent:** Claude Code (Claude Opus 5.5) in one terminal session, 1 Nov 2026. A human supplied the spec, the Stripe test keys and the Neon terms acceptance. Built with Claude Code, reviewed and verified by me (Jay).
+**Built with:** Claude Code (Claude Opus 5.5) in one terminal session, 1 Nov 2026. I wrote the spec and supplied the Stripe test keys and the Neon terms acceptance. Reviewed and verified by me (Jay).
 
 **Timeline** (wall clock, from the session's timestamp log):
 
 | Phase | Time | Notes |
 |---|---|---|
-| Scaffold, deps, tooling | ~6 min | Next 16 + TS. Homebrew couldn't build the Stripe CLI on this macOS, so the agent pulled the official release binary instead |
+| Scaffold, deps, tooling | ~6 min | Next 16 + TS. Homebrew couldn't build the Stripe CLI on this macOS, so Claude Code pulled the official release binary instead |
 | Schema + payment core (state machine, idempotency, webhooks, refunds) | ~4 min | Constraints first: the DB enforces the guarantees, not just app code |
 | API routes + UI (checkout, upsell, confirmation, admin) | ~3 min | |
 | Vitest suite + mutation checks | ~4 min | 39 tests against real Postgres with a fake Stripe that models idempotency-key semantics |
 | Playwright suite + Vercel/Neon setup | ~2 min | |
-| *Waiting on human (Stripe keys, Neon terms)* | *~10 min* | *not counted* |
+| *Waiting on me (Stripe keys, Neon terms)* | *~10 min* | *not counted* |
 | E2E against real Stripe test mode + fixing what it found | ~32 min | includes one ~10 min hung run |
 | Deploy, register webhook, e2e against the live URL | ~6 min | |
-| **Total agent time** | **~57 min** | ~68 min wall clock |
+| **Total build time** | **~57 min** | ~68 min wall clock |
 
 Most of the time went into verification, not writing code, which is the intended split.
 
@@ -88,7 +88,7 @@ Most of the time went into verification, not writing code, which is the intended
    - Webhooks: forged, tampered and missing signatures; replays; out-of-order events; a mid-processing failure, then Stripe's retry; amount mismatch.
    - Upsell failures: declines, non-retryable declines, the retry cap, 3DS success/fail/skip, lost network responses.
    - Refunds: 10 concurrent refund requests produce 1 Stripe refund.
-2. **Mutation checks.** The agent deleted the guards and confirmed the tests fail. The first concurrency test *passed* with the row lock removed (requests never actually overlapped). It was rewritten to force the race and now fails without the lock. Dropping the partial unique index is also caught.
+2. **Mutation checks.** Claude Code deleted the guards and confirmed the tests fail. The first concurrency test *passed* with the row lock removed (requests never actually overlapped). It was rewritten to force the race and now fails without the lock. Dropping the partial unique index is also caught.
 3. **Playwright, 6 tests on real Stripe test mode**, with webhooks forwarded by `stripe listen`. Charge counts are checked **with the Stripe API**, not just the UI:
    - 4242 happy path (`paid` must come from the webhook).
    - Double-click plus 5 parallel POSTs → exactly 1 upsell PaymentIntent.
