@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import { BRAND } from "@/lib/catalog";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: `${BRAND.name}: one-click upsell demo`,
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Fictional brand · Demo by DC Tech · Built with Claude Code. Test cards only: 4242 4242 4242 4242 · <Link href="/admin">admin</Link>
           </footer>
         </div>
+        <Analytics />
       </body>
     </html>
   );
